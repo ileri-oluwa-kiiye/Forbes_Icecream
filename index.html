@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css" type="text/css">
+        <title>ForbesIceCream</title>
+        <script type="text/javascript">
+
+            function darkMode() {
+                var element = document.body;
+                element.classList.toggle("darkmode");
+            }
+
+            setTimeout("alert('Welcome to Forbes Ice-cream!');", 5000)
+
+            function parseIceCream(orderString){
+                numIceCream = parseInt(orderString);
+                if (orderString.indexOf("dozen") != -1)
+                    numIceCream *= 12;
+                return numIceCream;
+            }
+
+            function updateOrder() {
+                const TAXRATE = 0.05;
+                const CONEPRICE = 3.00;
+                var numVanilla = parseIceCream(document.getElementById("vanilla").value);
+                var numChocolate = parseIceCream(document.getElementById("chocolate").value);
+
+                if (isNaN(numVanilla))
+                    numVanilla=0;
+
+                if (isNaN(numChocolate))
+                    numChocolate=0;
+                var subTotal = (numVanilla + numChocolate) * CONEPRICE;
+                var tax = subTotal * TAXRATE;
+                var total = subTotal + tax;
+                document.getElementById("subtotal").value = "$"+subTotal.toFixed(2);
+                document.getElementById("tax").value = "$"+tax.toFixed(2);
+                document.getElementById("total").value = "$"+total.toFixed(2);
+            }
+
+            function placeOrder(){
+                if (document.getElementById("name").value=="")
+                    alert("I'm sorry but you must provide your name before submitting an order.")
+
+                else if (document.getElementById("pickuptime").value==""||
+                    isNaN(document.getElementById("pickuptime").value))
+                    alert("I'm sorry but you must provide the time you want your order to get to you.")
+
+            
+                else
+                //Submit order to server...
+                form.submit();
+            }
+        </script>
+
+    </head>
+    
+    <body>
+        <div class="allcontent">
+
+            <a onclick="darkMode()"><img src="light.svg" alt="Change Mode" title="Change the mode" width="30" height="30"></a>
+
+            <div>
+                    <h1>Forbes Ice-cream</h1>
+                    <p>
+                        All cones 3 dollars each, any flavours!
+                    </p>   
+            </div>
+
+
+            <div>
+                    <img src="brand.webp" alt="Forbes brand image" >
+            </div>
+
+            <div>
+                <form name="orderform" action="donuts.php" method="POST">
+                    <p> 
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name">
+                    </p>
+        
+                    <p>
+                        <label for="vanilla"># of vanilla cones:</label>
+                        <input type="" name="vanilla" id="vanilla" onchange="updateOrder();">
+                    </p>
+        
+                    <p>
+                        <label for="chocolate"># of chocolate cones:</label>
+                        <input type="" name="chocolate" id="chocolate" onchange="updateOrder();">
+                    </p>
+        
+                    <p>
+                        <label for="pickuptime">Minuted 'til pickup:</label>
+                        <input type="" name="pickuptime" id="pickuptime">
+                    </p>
+        
+                    <p>
+                        <label for="subtotal">Subtotal:</label>
+                        <input type="" name="subtotal" id="subtotal">
+                    </p>
+        
+                    <p>
+                        <label for="tax">Tax:</label>
+                        <input type="" name="tax" id="tax">
+                    </p>
+        
+                    <p>
+                        <label for="total">Total:</label>
+                        <input type="" name="total" id="total">
+                    </p>
+        
+                    <p>
+                        <input type="submit" value="Place Order" id="order" onclick="placeOrder(this.form);">
+                        <input type="reset" name="reset">
+                    </p>
+                </form>
+            </div>    
+       </div>
+    </body>
+</html>

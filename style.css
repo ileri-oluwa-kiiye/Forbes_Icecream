@@ -1,0 +1,22 @@
+body{
+    align-items: center;
+    background-color: #aaaaaa;
+    color: black;
+    padding: 10% 20%;
+}
+
+.allcontent{
+    padding: 40px;
+    text-align: center;
+    border-radius: 50px;
+    box-shadow: 20px 20px 40px #919191,
+                -20px -20px 40px #c4c4c4;
+}
+
+.darkmode{
+    background-color: #222222;
+    color: rgb(255, 255, 255);
+    padding: 10% 20%;
+    align-items: center;
+}
+
